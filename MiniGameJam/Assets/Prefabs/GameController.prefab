@@ -50,3 +50,4 @@ MonoBehaviour:
   spawnTimer: 1
   sheep: {fileID: 421372524711677747, guid: f77ee005edfeffa4d9f210c93d82f641, type: 3}
   spawnPos: {x: 10, y: 3}
+  textElement: {fileID: 0}
