@@ -77,5 +77,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2b90e2c226a102e48900fd4d44243a59, type: 3}
   - {fileID: 8300000, guid: 189efcddf50b2d74faa71869a7abbc82, type: 3}
   timerRange: 1
-  gameTimer: 60
-  backGround: {fileID: 0}
+  roundTimer: 60
+  bg: {fileID: 0}
+  bgSprite:
+  - {fileID: 21300000, guid: 881793cfd97351e48bfbc8e70418555e, type: 3}
+  - {fileID: 21300000, guid: 0be07a49c0492794d8a94d209fcfd1da, type: 3}
+  - {fileID: 21300000, guid: 1a48159e283c1204492fcfb8beeab264, type: 3}
+  - {fileID: 21300000, guid: 95fa63e673050e645a66aed6a0d0961b, type: 3}
+  - {fileID: 21300000, guid: 436885614a8ccfc40bba47590de38a6a, type: 3}
+  monsterTime: 10
+  monsterRange: 3
+  timeToDeath: 5
+  interactables:
+  - {fileID: 4216181082566514961, guid: ce5fb37b308bf5346a13864f74830ceb, type: 3}
+  - {fileID: 6038043029095079554, guid: dfbe487e67e710f43a4cece08ea2ce44, type: 3}
+  - {fileID: 4333566624535963453, guid: e52874dcd46ff374d843086cce09e7ce, type: 3}
+  - {fileID: 964116492718525564, guid: 006414757723d6842b21facb9ea7a428, type: 3}

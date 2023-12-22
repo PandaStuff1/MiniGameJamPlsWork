@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -29,14 +30,18 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private float timerRange = 1;
     private float timerMod = 0;
+    private GameObject interactObject;
     enum Ambience
     { 
-        Car,
         CurtainsClose,
-        CurtainsOpen,
-        Door,
-        DoorCreak,
         DoorLock,
+        DoorCreak,
+        CurtainsOpen,
+        SpookyTapping,
+        Car,
+        Door,
+        LightOn,
+        LightOff,
         DrawerOpen,
         DrawerClose,
         Steps,
@@ -49,33 +54,39 @@ public class GameController : MonoBehaviour
         HeartSlow,
         KnockOnce,
         KnockTwice,
-        LightOff,
-        LightOn,
         NightAmbience,
         SpookyNoise,
-        SpookyTapping,
         SpookyThud,
         Tapping,
         Height
     }
+
     [SerializeField]
     private float roundTimer = 60;
     private float currentTime = 0;
     [SerializeField]
-    private GameObject backGround;
+    private GameObject bg;
     [SerializeField]
-    private Sprite[] background = new Sprite[5];
+    private Sprite[] bgSprite = new Sprite[5];
     [SerializeField]
     private float monsterTime = 10;
     [SerializeField]
     private float monsterRange = 3;
     private float monsterMod = 0;
-
+    [SerializeField]
+    private float timeToDeath = 5;
+    private int currentEvent = 0;
+    [SerializeField]
+    private GameObject[] interactables = new GameObject[4];
+    private bool monsterActive = false;
+    [SerializeField]
+    private YouKindOfWin badWin;
 
     void Start()
     {
         remainingTime = spawnTimer;
         audioSource = GetComponent<AudioSource>();
+        monsterMod = Random.Range(monsterRange, -monsterRange);
     }
 
     // Update is called once per frame
@@ -96,8 +107,34 @@ public class GameController : MonoBehaviour
         }
         if(currentTime >= roundTimer)
         {
-            //go to win next stage
             currRound++;
+            if (counter >= totalSheep + 5 || counter <= totalSheep - 5)
+            {
+                SceneManager.LoadScene("YouWin", LoadSceneMode.Additive);
+            }
+            else
+            {
+                badWin.SetSheep(counter);
+                badWin.SetTotalSheep(totalSheep);
+                SceneManager.LoadScene("YouKindOfWin", LoadSceneMode.Additive);
+            }
+        }
+        if (currentTime >= monsterTime + monsterMod)
+        {
+            if(monsterActive == false)
+            {
+                monsterActive = true;
+                currentEvent = Random.Range(1, 5);
+                bg.GetComponent<SpriteRenderer>().sprite = bgSprite[currentEvent];
+                if (currentEvent == 1) { lightOff(); }
+                else if (currentEvent == 2) { doorCreak(); }
+                else if (currentEvent == 3) { drawerOpen(); }
+                else if (currentEvent == 4) { curtainClose(); }
+            }
+            if(currentTime >= monsterTime + monsterMod + timeToDeath)
+            {
+                SceneManager.LoadScene("Youlose", LoadSceneMode.Additive);
+            }
         }
     }
 
@@ -122,36 +159,51 @@ public class GameController : MonoBehaviour
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[0], new Vector2(-6.31f, -3.64f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[3];
     }
 
-    private void curtainClose()
+    public void curtainClose()
     {
         audioSource.clip = ambientNoises[(int)Ambience.CurtainsClose];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
     }
 
     private void curtainOpen()
     {
         audioSource.clip = ambientNoises[(int)Ambience.CurtainsOpen];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[0], new Vector2(-1.67f, -1.47f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[2];
     }
 
-    private void doorLock()
+    public void doorLock()
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorLock];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
     }
 
     private void drawerOpen()
     {
-        audioSource.clip = ambientNoises[(int)Ambience.DrawerOpen];
+        audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[0], new Vector2(1.93f, -3.64f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[4];
     }
 
     private void drawerClose()
     {
-        audioSource.clip = ambientNoises[(int)Ambience.DrawerClose];
+        audioSource.clip = ambientNoises[(int)Ambience.DoorLock];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
     }
 
     private void footsteps()
@@ -206,12 +258,17 @@ public class GameController : MonoBehaviour
     {
         audioSource.clip = ambientNoises[(int)Ambience.LightOn];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
     }
 
-    private void lightOff()
+    public void lightOff()
     {
         audioSource.clip = ambientNoises[(int)Ambience.LightOff];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[2], new Vector2(-2.38f, -4.2f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[1];
     }
 
     private void nightAmbience()
@@ -226,7 +283,7 @@ public class GameController : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
-    private void spookyTapping()
+    public void spookyTapping()
     {
         audioSource.clip = ambientNoises[(int)Ambience.SpookyTapping];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
