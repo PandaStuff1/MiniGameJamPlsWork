@@ -47,7 +47,35 @@ MonoBehaviour:
   counter: 0
   totalSheep: 0
   totalRounds: 3
-  spawnTimer: 1
+  spawnTimer: 1.5
   sheep: {fileID: 421372524711677747, guid: f77ee005edfeffa4d9f210c93d82f641, type: 3}
-  spawnPos: {x: 10, y: 3}
+  spawnPos: {x: 10, y: 3.2}
   textElement: {fileID: 0}
+  ambientNoises:
+  - {fileID: 8300000, guid: ef088a898f075d14486bac635ea0bd8e, type: 3}
+  - {fileID: 8300000, guid: b43812c1ab63f0c45972dd6406a26258, type: 3}
+  - {fileID: 8300000, guid: 69a4ece4b8c768149bed69a854f61a6d, type: 3}
+  - {fileID: 8300000, guid: cc1c40741aa5cf8458b489ab5e40ddbd, type: 3}
+  - {fileID: 8300000, guid: c85d445de71989d49b363a661ee7d8ae, type: 3}
+  - {fileID: 8300000, guid: 07802d6a6bbe7074d9eaa716be3eca97, type: 3}
+  - {fileID: 8300000, guid: 94ddb88567354164bb2c6b31148eaa86, type: 3}
+  - {fileID: 8300000, guid: b9b2b728fe9f0304fa35da56e8ec5d8d, type: 3}
+  - {fileID: 8300000, guid: 00c1d1ad807605f42becb4bfb9346056, type: 3}
+  - {fileID: 8300000, guid: 6a4bc2ba78184674a9c67a167e03b2cf, type: 3}
+  - {fileID: 8300000, guid: 47ae714db7237084d93a212f405e49a5, type: 3}
+  - {fileID: 8300000, guid: 4085bcf2f91123b4e80ba897737603b2, type: 3}
+  - {fileID: 8300000, guid: c3989796774ada14abc9bab3a5758f58, type: 3}
+  - {fileID: 8300000, guid: 8c65843ec58fc7b40adf8eaea7431b97, type: 3}
+  - {fileID: 8300000, guid: 47216a7d12177e84292c6bf076de75fc, type: 3}
+  - {fileID: 8300000, guid: df0dac746d710a8429002a04c145925b, type: 3}
+  - {fileID: 8300000, guid: 77f0a975dd1bdec45aa3c392e972335f, type: 3}
+  - {fileID: 8300000, guid: e2ea5f7f1ca131347ab3fe61be702f89, type: 3}
+  - {fileID: 8300000, guid: f7648728709c2eb4b876a5ec618bb473, type: 3}
+  - {fileID: 8300000, guid: 517a930c79b304544baad78d7f124372, type: 3}
+  - {fileID: 8300000, guid: a915ef55e3fa84445bcb17d99949092f, type: 3}
+  - {fileID: 8300000, guid: 315589e3a64dd8041b5aee3c71f8e7ea, type: 3}
+  - {fileID: 8300000, guid: 2b90e2c226a102e48900fd4d44243a59, type: 3}
+  - {fileID: 8300000, guid: 189efcddf50b2d74faa71869a7abbc82, type: 3}
+  timerRange: 1
+  gameTimer: 60
+  backGround: {fileID: 0}

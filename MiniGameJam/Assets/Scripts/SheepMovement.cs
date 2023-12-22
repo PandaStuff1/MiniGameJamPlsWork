@@ -6,6 +6,9 @@ public class SheepMovement : MonoBehaviour
 {
     [SerializeField]
     private float sheepSpeed = 5;
+    [SerializeField]
+    private float speedRange = 1;
+    private float speedMod = 0;
 
     [SerializeField]
     private BoxCollider2D hitBox;
@@ -14,17 +17,19 @@ public class SheepMovement : MonoBehaviour
     void Start()
     {
         hitBox = gameObject.GetComponent<BoxCollider2D>();
+        speedMod = Random.Range(speedRange, -speedRange);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(transform.position.x - sheepSpeed * Time.deltaTime, transform.position.y);
+        transform.position = new Vector2(transform.position.x - (sheepSpeed - speedMod) * Time.deltaTime, transform.position.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if(collision.tag != "Sheep")
+            Destroy(gameObject);
     }
 
 }
