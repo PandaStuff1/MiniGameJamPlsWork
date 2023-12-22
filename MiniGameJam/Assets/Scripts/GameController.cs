@@ -47,7 +47,6 @@ public class GameController : MonoBehaviour
         Steps,
         Fox,
         FrameRattle,
-        Heart,
         Heart125,
         Heart150,
         Heart200,
@@ -93,14 +92,14 @@ public class GameController : MonoBehaviour
     void Update()
     {
         remainingTime -= Time.deltaTime;
-        currentTime += Time.deltaTime * 10;
+        currentTime += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             addCounter();
             doorCreak();
         }
-        if(remainingTime<=0)
+        if(remainingTime <= 0)
         {
             spawnSheep();
             remainingTime = spawnTimer - timerMod;
@@ -159,7 +158,7 @@ public class GameController : MonoBehaviour
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        interactObject = Instantiate(interactables[0], new Vector2(-6.31f, -3.64f), Quaternion.identity);
+        interactObject = Instantiate(interactables[1], new Vector2(-6.31f, -3.64f), Quaternion.identity);
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[3];
     }
 
@@ -193,11 +192,11 @@ public class GameController : MonoBehaviour
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        interactObject = Instantiate(interactables[0], new Vector2(1.93f, -3.64f), Quaternion.identity);
+        interactObject = Instantiate(interactables[3], new Vector2(1.93f, -3.64f), Quaternion.identity);
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[4];
     }
 
-    private void drawerClose()
+    public void drawerClose()
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorLock];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
@@ -205,16 +204,26 @@ public class GameController : MonoBehaviour
         Destroy(interactObject);
         monsterActive = false;
     }
+    public void lightOff()
+    {
+        audioSource.clip = ambientNoises[(int)Ambience.LightOff];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[2], new Vector2(-2.38f, -4.2f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[1];
+    }
+    private void lightOn()
+    {
+        audioSource.clip = ambientNoises[(int)Ambience.LightOn];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
+    }
+
 
     private void footsteps()
     {
         audioSource.clip = ambientNoises[(int)Ambience.Steps];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
-    }
-
-    private void heartbeat()
-    {
-        audioSource.clip = ambientNoises[(int)Ambience.Heart];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
@@ -254,22 +263,6 @@ public class GameController : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
-    private void lightOn()
-    {
-        audioSource.clip = ambientNoises[(int)Ambience.LightOn];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
-        Destroy(interactObject);
-        monsterActive = false;
-    }
-
-    public void lightOff()
-    {
-        audioSource.clip = ambientNoises[(int)Ambience.LightOff];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        interactObject = Instantiate(interactables[2], new Vector2(-2.38f, -4.2f), Quaternion.identity);
-        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[1];
-    }
 
     private void nightAmbience()
     {

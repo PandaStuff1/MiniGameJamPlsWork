@@ -507,6 +507,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 543706177}
     - target: {fileID: 6011099224592875685, guid: 79733964d0b8fb84496a0609a7882c4f, type: 3}
+      propertyPath: badWin
+      value: 
+      objectReference: {fileID: 1761946656}
+    - target: {fileID: 6011099224592875685, guid: 79733964d0b8fb84496a0609a7882c4f, type: 3}
       propertyPath: backGround
       value: 
       objectReference: {fileID: 543706177}
