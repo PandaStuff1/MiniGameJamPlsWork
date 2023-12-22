@@ -15,12 +15,12 @@ public class GameController : MonoBehaviour
     private int totalRounds = 3;
     static private int currRound = 0;
     [SerializeField]
-    private float spawnTimer = 3;
+    private float spawnTimer = 0.25f;
     private float remainingTime = 0;
     [SerializeField]
     private GameObject sheep;
     [SerializeField]
-    private Vector2 spawnPos = new Vector2(10, 3);
+    private Vector2 spawnPos = new Vector2(7, 3.5f);
     [SerializeField]
     private TextMeshProUGUI textElement;
     private AudioSource audioSource;
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
     private void addCounter()
     {
         counter++;
-        //textElement.text = counter.ToString();
+        textElement.text = counter.ToString();
         Debug.Log(counter);
     }
 
@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
     {
         totalSheep++;
 
-        Vector2 spawnPos = new Vector2(transform.position.x, Random.Range(1.0f, 5.0f));
+        //Vector2 spawnPos = new Vector2(transform.position.x, tr);
         Instantiate(sheep, spawnPos, Quaternion.identity);
 
         
@@ -74,5 +74,103 @@ public class GameController : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
+    private void curtainClose()
+    {
 
+    }
+
+    private void curtainOpen()
+    {
+
+    }
+
+    private void doorLock()
+    {
+
+    }
+
+    private void drawerOpen()
+    {
+
+    }
+
+    private void drawerClose()
+    {
+
+    }
+
+    private void footsteps()
+    {
+
+    }
+
+    private void heartbeat()
+    {
+
+    }
+
+    private void heartbeat125()
+    {
+
+    }
+
+    private void hearbeat150()
+    {
+
+    }
+
+    private void heartbeat200()
+    {
+
+    }
+
+    private void hearbeat50()
+    {
+
+    }
+
+    private void knocking1()
+    {
+
+    }
+
+    private void knocking2()
+    {
+
+    }
+
+    private void lightOn()
+    {
+
+    }
+
+    private void lightOff()
+    {
+
+    }
+
+    private void nightAmbience()
+    {
+
+    }
+
+    private void spookyNoise()
+    {
+
+    }
+
+    private void spookyTapping()
+    {
+
+    }
+
+    private void spookyThud()
+    {
+
+    }
+
+    private void tapping()
+    {
+
+    }
 }
