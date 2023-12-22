@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     private int totalSheep = 0;
     [SerializeField]
     private int totalRounds = 3;
-    private int currRound = 0;
+    static private int currRound = 0;
     [SerializeField]
     private float spawnTimer = 3;
     private float remainingTime = 0;
@@ -23,11 +23,15 @@ public class GameController : MonoBehaviour
     private Vector2 spawnPos = new Vector2(10, 3);
     [SerializeField]
     private TextMeshProUGUI textElement;
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip door;
 
 
     void Start()
     {
         remainingTime = spawnTimer;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,6 +41,7 @@ public class GameController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             addCounter();
+            doorCreak();
         }
         if(remainingTime<=0)
         {
@@ -49,7 +54,7 @@ public class GameController : MonoBehaviour
     private void addCounter()
     {
         counter++;
-        textElement.text = counter.ToString();
+        //textElement.text = counter.ToString();
         Debug.Log(counter);
     }
 
@@ -62,4 +67,12 @@ public class GameController : MonoBehaviour
 
         
     }
+
+    private void doorCreak()
+    {
+        audioSource.clip = door;
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+    }
+
+
 }
