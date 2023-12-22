@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Vector2 spawnPos = new Vector2(10, 3);
     [SerializeField]
-    private TextMeshPro textElement;
+    private TextMeshProUGUI textElement;
 
 
     void Start()
