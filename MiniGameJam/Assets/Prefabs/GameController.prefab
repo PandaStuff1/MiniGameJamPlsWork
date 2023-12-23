@@ -51,7 +51,7 @@ MonoBehaviour:
   totalRounds: 3
   spawnTimer: 1.5
   sheep: {fileID: 421372524711677747, guid: f77ee005edfeffa4d9f210c93d82f641, type: 3}
-  spawnPos: {x: 10, y: 3.2}
+  spawnPos: {x: 10, y: 3.4}
   textElement: {fileID: 0}
   ambientNoises:
   - {fileID: 8300000, guid: b43812c1ab63f0c45972dd6406a26258, type: 3}

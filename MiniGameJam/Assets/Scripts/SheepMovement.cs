@@ -12,12 +12,15 @@ public class SheepMovement : MonoBehaviour
 
     [SerializeField]
     private BoxCollider2D hitBox;
+
+    private GameObject controller;
     
     // Start is called before the first frame update
     void Start()
     {
         hitBox = gameObject.GetComponent<BoxCollider2D>();
         speedMod = Random.Range(speedRange, -speedRange);
+        controller = GameObject.Find("GameController");
     }
 
     // Update is called once per frame
@@ -28,8 +31,13 @@ public class SheepMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag != "Sheep")
+        if(collision.tag != "Sheep" && collision.tag != "Counter")
             Destroy(gameObject);
+
+        if(collision.tag == "counter")
+        {
+            controller.GetComponent<GameController>().totalSheep++;
+        }
     }
 
 }

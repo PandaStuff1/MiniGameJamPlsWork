@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int counter = 0;
     [SerializeField]
-    private int totalSheep = 0;
+    public int totalSheep = 0;
     [SerializeField]
     private int totalRounds = 3;
     static private int currRound = 0;
@@ -107,12 +107,15 @@ public class GameController : MonoBehaviour
         if(currentTime >= roundTimer)
         {
             currRound++;
-            if (counter >= totalSheep + 5 || counter <= totalSheep - 5)
+            //if (counter <= totalSheep + 5 || counter >= totalSheep - 5)
+            if (counter == totalSheep)
             {
+                this.enabled = false;
                 SceneManager.LoadScene("YouWin", LoadSceneMode.Additive);
             }
             else
             {
+                this.enabled = false;
                 badWin.SetSheep(counter);
                 badWin.SetTotalSheep(totalSheep);
                 SceneManager.LoadScene("YouKindOfWin", LoadSceneMode.Additive);
