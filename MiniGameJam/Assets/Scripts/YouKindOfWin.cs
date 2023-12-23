@@ -19,9 +19,13 @@ public class YouKindOfWin : MonoBehaviour
         if (sceneName == "YouKindOfWin")
         {
             textElement = GetComponent<TextMeshProUGUI>();
-            textElement.text = "You only counted " + sheepCount + " out of " + totalSheep;
+            textElement.text = "You counted " + sheepCount + " out of " + totalSheep;
 
         }
+
+        //alice added this
+        textElement.text = "You only counted " + sheepCount + " out of " + totalSheep + " sheep.";
+
     }
 
     public void SetSheep(int sheep)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -31,6 +32,8 @@ public class GameController : MonoBehaviour
     private float timerRange = 1;
     private float timerMod = 0;
     private GameObject interactObject;
+
+
     enum Ambience
     { 
         CurtainsClose,
@@ -86,6 +89,10 @@ public class GameController : MonoBehaviour
         remainingTime = spawnTimer;
         audioSource = GetComponent<AudioSource>();
         monsterMod = Random.Range(monsterRange, -monsterRange);
+
+        //alice added this for the volume slider
+        audioSource.volume = PlayerPrefs.GetFloat("Volume");
+         
     }
 
     // Update is called once per frame

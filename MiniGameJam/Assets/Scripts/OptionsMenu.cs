@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
 
-    public AudioMixer audioMixer;
     public Slider slider;
 
     public void MenuButton()
@@ -20,7 +19,7 @@ public class OptionsMenu : MonoBehaviour
     public void Start()
     {
 
-        float volume = PlayerPrefs.GetFloat("musicVolume", slider.maxValue);
+        float volume = PlayerPrefs.GetFloat("Volume", slider.maxValue);
         SetVolume(volume);
 
         slider.value = volume;
@@ -31,8 +30,6 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        
-        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
 
         SaveVolume(volume);
 
@@ -41,7 +38,7 @@ public class OptionsMenu : MonoBehaviour
     public void SaveVolume(float volume)
     {
 
-        PlayerPrefs.SetFloat("musicVolume", volume);
+        PlayerPrefs.SetFloat("Volume", volume);
         Debug.Log("The volume is " + volume);
 
     }
