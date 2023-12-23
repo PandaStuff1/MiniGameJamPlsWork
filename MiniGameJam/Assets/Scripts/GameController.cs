@@ -97,7 +97,6 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             addCounter();
-            doorCreak();
         }
         if(remainingTime <= 0)
         {
