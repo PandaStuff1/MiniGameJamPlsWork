@@ -24,7 +24,7 @@ public class YouKindOfWin : MonoBehaviour
         }
 
         //alice added this
-        textElement.text = "You only counted " + sheepCount + " out of " + totalSheep + " sheep.";
+        textElement.text = "You counted " + sheepCount + " out of " + totalSheep + " sheep.";
 
     }
 
