@@ -170,6 +170,7 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
         Destroy(interactObject);
         monsterActive = false;
+        monsterTime += currentTime;
     }
 
     private void curtainOpen()
@@ -187,6 +188,7 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
         Destroy(interactObject);
         monsterActive = false;
+        monsterTime += currentTime;
     }
 
     private void drawerOpen()
@@ -204,6 +206,7 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
         Destroy(interactObject);
         monsterActive = false;
+        monsterTime += currentTime;
     }
     public void lightOff()
     {
@@ -219,6 +222,7 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
         Destroy(interactObject);
         monsterActive = false;
+        monsterTime += currentTime;
     }
 
 
