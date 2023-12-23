@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1041376774244929406}
   m_Layer: 0
   m_Name: LampInteract
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -151,3 +151,5 @@ MonoBehaviour:
   interactButton: {fileID: 0}
   GameController: {fileID: 0}
   interactType: Lamp
+  test: {fileID: 3331605940899708176, guid: 6eb7bac70cd0527478e82e02d72033aa, type: 3}
+  instance: {fileID: 0}

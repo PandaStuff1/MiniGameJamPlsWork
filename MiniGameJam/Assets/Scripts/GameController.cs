@@ -132,6 +132,7 @@ public class GameController : MonoBehaviour
             }
             if(currentTime >= monsterTime + monsterMod + timeToDeath)
             {
+                this.enabled = false;
                 SceneManager.LoadScene("Youlose", LoadSceneMode.Additive);
             }
         }
@@ -158,7 +159,7 @@ public class GameController : MonoBehaviour
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        interactObject = Instantiate(interactables[1], new Vector2(-6.31f, -3.64f), Quaternion.identity);
+        interactObject = Instantiate(interactables[1], new Vector2(6.31f, -3.64f), Quaternion.identity);
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[3];
     }
 
@@ -211,7 +212,7 @@ public class GameController : MonoBehaviour
         interactObject = Instantiate(interactables[2], new Vector2(-2.38f, -4.2f), Quaternion.identity);
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[1];
     }
-    private void lightOn()
+    public void lightOn()
     {
         audioSource.clip = ambientNoises[(int)Ambience.LightOn];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);

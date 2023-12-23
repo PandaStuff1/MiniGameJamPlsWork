@@ -11,6 +11,12 @@ public class Interact : MonoBehaviour
     private GameObject GameController;
     [SerializeField]
     private string interactType;
+
+    [SerializeField]
+    private GameObject test;
+
+    [SerializeField]
+    private GameObject instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,28 +24,36 @@ public class Interact : MonoBehaviour
         GameController = GameObject.Find("GameController");
     }
 
-    public void OnClick()
+    private void Update()
     {
-        Debug.Log("click");
-        if (interactType == "Lamp")
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("call1");
-            GameController.GetComponent<GameController>().lightOff();
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            instance = Instantiate(test, new Vector2(worldPosition.x, worldPosition.y), Quaternion.identity);
         }
-        else if (interactType == "Door")
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Interact")
         {
-            Debug.Log("call2");
-            GameController.GetComponent<GameController>().doorLock();
+            if (interactType == "Lamp")
+            {
+                GameController.GetComponent<GameController>().lightOn();
+            }
+            else if (interactType == "Door")
+            {
+                GameController.GetComponent<GameController>().doorLock();
+            }
+            else if (interactType == "Curtain")
+            {
+                GameController.GetComponent<GameController>().curtainClose();
+            }
+            else if (interactType == "Wardrobe")
+            {
+                GameController.GetComponent<GameController>().drawerClose();
+            }
         }
-        else if (interactType == "Curtain")
-        {
-            Debug.Log("call3");
-            GameController.GetComponent<GameController>().curtainClose();
-        }
-        else if (interactType == "Wardrobe")
-        {
-            Debug.Log("call4");
-            GameController.GetComponent<GameController>().drawerClose();
-        }
+        Destroy(instance);
     }
 }
