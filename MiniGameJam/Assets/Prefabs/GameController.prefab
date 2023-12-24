@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7593764981860467479}
   - component: {fileID: 6011099224592875685}
-  - component: {fileID: -4900053888787626351}
   - component: {fileID: -4368378621763138544}
   m_Layer: 0
   m_Name: GameController
@@ -95,19 +94,6 @@ MonoBehaviour:
   - {fileID: 4333566624535963453, guid: e52874dcd46ff374d843086cce09e7ce, type: 3}
   - {fileID: 964116492718525564, guid: 006414757723d6842b21facb9ea7a428, type: 3}
   badWin: {fileID: 0}
---- !u!114 &-4900053888787626351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 852413844645605202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a947984aa911d6e46bd1d83ff2f0f957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textElement: {fileID: 0}
 --- !u!82 &-4368378621763138544
 AudioSource:
   m_ObjectHideFlags: 0

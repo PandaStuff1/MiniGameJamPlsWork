@@ -914,7 +914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You only counted: x/x sheep'
+  m_text: You counted x out of x sheep
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d610ce0c35d51254a8bcfdec9305b446, type: 2}
   m_sharedMaterial: {fileID: 127157668456561126, guid: d610ce0c35d51254a8bcfdec9305b446, type: 2}
