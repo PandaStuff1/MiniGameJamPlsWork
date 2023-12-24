@@ -887,8 +887,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 845.3351, y: 90.3335}
+  m_AnchoredPosition: {x: 0, y: -18.3118}
+  m_SizeDelta: {x: 845.3351, y: 86.957}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150951421
 MonoBehaviour:
@@ -920,7 +920,9 @@ MonoBehaviour:
     - LEFT CLICK on the night light
     when it turns off to turn it back on
 
-    - LEFT CLICK on its hiding place to
+    - LEFT CLICK on the nightmare''s hiding
+    place to
+
     stop it getting into the room'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d610ce0c35d51254a8bcfdec9305b446, type: 2}
