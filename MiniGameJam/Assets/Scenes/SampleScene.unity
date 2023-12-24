@@ -572,6 +572,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 543706177}
     - target: {fileID: 6011099224592875685, guid: 79733964d0b8fb84496a0609a7882c4f, type: 3}
+      propertyPath: roundTimer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011099224592875685, guid: 79733964d0b8fb84496a0609a7882c4f, type: 3}
       propertyPath: spawnPos.y
       value: 3.624896
       objectReference: {fileID: 0}
