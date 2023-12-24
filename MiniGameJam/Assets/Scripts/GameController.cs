@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -56,11 +57,10 @@ public class GameController : MonoBehaviour
         HeartSlow,
         KnockOnce,
         KnockTwice,
-        NightAmbience,
         SpookyNoise,
         SpookyThud,
         Tapping,
-        Height
+        Monster
     }
 
     [SerializeField]
@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject bg;
     [SerializeField]
-    private Sprite[] bgSprite = new Sprite[5];
+    private Sprite[] bgSprite = new Sprite[6];
     [SerializeField]
     private float monsterTime = 10;
     [SerializeField]
@@ -84,6 +84,11 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private YouKindOfWin badWin;
 
+    //new
+    public float newTimer = 0;
+    //private int randomsound = 0;
+    //public bool soundActive = false;
+
     void Start()
     {
         remainingTime = spawnTimer;
@@ -92,7 +97,9 @@ public class GameController : MonoBehaviour
 
         //alice added this for the volume slider
         audioSource.volume = PlayerPrefs.GetFloat("Volume");
-         
+
+        Invoke("Monster", 0f);
+
     }
 
     // Update is called once per frame
@@ -101,11 +108,14 @@ public class GameController : MonoBehaviour
         remainingTime -= Time.deltaTime;
         currentTime += Time.deltaTime;
 
+        //new
+        newTimer += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             addCounter();
         }
-        if(remainingTime <= 0)
+        if(remainingTime <= 0 & currentTime <= 58)
         {
             spawnSheep();
             remainingTime = spawnTimer - timerMod;
@@ -127,9 +137,16 @@ public class GameController : MonoBehaviour
                 SceneManager.LoadScene("YouKindOfWin", LoadSceneMode.Additive);
             }
         }
+
+        //Invoke("RandomSound", 16f);
+  
+    }
+
+    public void Monster()
+    {
         if (currentTime >= monsterTime + monsterMod)
         {
-            if(monsterActive == false)
+            if (monsterActive == false)
             {
                 monsterActive = true;
                 currentEvent = Random.Range(1, 5);
@@ -137,15 +154,25 @@ public class GameController : MonoBehaviour
                 if (currentEvent == 1) { lightOff(); }
                 else if (currentEvent == 2) { doorCreak(); }
                 else if (currentEvent == 3) { drawerOpen(); }
-                else if (currentEvent == 4) { curtainClose(); }
+                else if (currentEvent == 4) { curtainOpen(); }
+                else if (currentEvent == 5) { monsterNoise(); }
+
+                newTimer = 0f;
+
             }
-            if(currentTime >= monsterTime + monsterMod + timeToDeath)
+            //if (currentTime >= currentTime + timeToDeath)
+
+            if (newTimer >= 5f & currentEvent != 5) //new
             {
                 this.enabled = false;
                 SceneManager.LoadScene("Youlose", LoadSceneMode.Additive);
             }
         }
+
+        Invoke("Monster", Random.Range(5f, 7f));
     }
+
+
 
     private void addCounter()
     {
@@ -162,24 +189,37 @@ public class GameController : MonoBehaviour
     }
 
 
+    //i was trying to make ambient noises but idk hopw and this didnt work
+    /*public void RandomSound()
+    {
+        soundActive = false;
+
+        if (soundActive == false)
+        {
+            randomsound = Random.Range(1, 12);
+            if (randomsound == 1) { footsteps(); }
+            else if (randomsound == 2) { heartbeat125(); }
+            else if (randomsound == 3) { heartbeat150(); }
+            else if (randomsound == 4) { heartbeat200(); }
+            else if (randomsound == 5) { heartbeatSlow(); }
+            else if (randomsound == 6) { knocking1(); }
+            else if (randomsound == 7) { knocking2(); }
+            else if (randomsound == 8) { nightAmbience(); }
+            else if (randomsound == 9) { spookyNoise(); }
+            else if (randomsound == 10) { spookyTapping(); }
+            else if (randomsound == 11) { spookyThud(); }
+            else if (randomsound == 12) { tapping(); }
+        }
+    }*/
+
 
     #region Sound jazz
-    private void doorCreak()
-    {
-        audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        interactObject = Instantiate(interactables[1], new Vector2(6.31f, -3.64f), Quaternion.identity);
-        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[3];
-    }
 
-    public void curtainClose()
+    private void monsterNoise()
     {
-        audioSource.clip = ambientNoises[(int)Ambience.CurtainsClose];
+        audioSource.clip = ambientNoises[(int)Ambience.Monster];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
-        Destroy(interactObject);
-        monsterActive = false;
-        monsterTime += currentTime;
+        Debug.Log("monster noise called");
     }
 
     private void curtainOpen()
@@ -190,6 +230,24 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[2];
     }
 
+    public void curtainClose()
+    {
+        audioSource.clip = ambientNoises[(int)Ambience.CurtainsClose];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
+        //monsterTime += currentTime;
+    }
+
+    private void doorCreak()
+    {
+        audioSource.clip = ambientNoises[(int)Ambience.DoorCreak];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[1], new Vector2(6.31f, -3.64f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[3];
+    }
+
     public void doorLock()
     {
         audioSource.clip = ambientNoises[(int)Ambience.DoorLock];
@@ -197,7 +255,24 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
         Destroy(interactObject);
         monsterActive = false;
-        monsterTime += currentTime;
+        //monsterTime += currentTime;
+    }
+
+    public void lightOff()
+    {
+        audioSource.clip = ambientNoises[(int)Ambience.LightOff];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        interactObject = Instantiate(interactables[2], new Vector2(-2.38f, -4.2f), Quaternion.identity);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[1];
+    }
+    public void lightOn()
+    {
+        audioSource.clip = ambientNoises[(int)Ambience.LightOn];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
+        Destroy(interactObject);
+        monsterActive = false;
+        //monsterTime += currentTime;
     }
 
     private void drawerOpen()
@@ -215,23 +290,7 @@ public class GameController : MonoBehaviour
         bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
         Destroy(interactObject);
         monsterActive = false;
-        monsterTime += currentTime;
-    }
-    public void lightOff()
-    {
-        audioSource.clip = ambientNoises[(int)Ambience.LightOff];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        interactObject = Instantiate(interactables[2], new Vector2(-2.38f, -4.2f), Quaternion.identity);
-        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[1];
-    }
-    public void lightOn()
-    {
-        audioSource.clip = ambientNoises[(int)Ambience.LightOn];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
-        bg.GetComponent<SpriteRenderer>().sprite = bgSprite[0];
-        Destroy(interactObject);
-        monsterActive = false;
-        monsterTime += currentTime;
+        //monsterTime += currentTime;
     }
 
 
@@ -247,7 +306,7 @@ public class GameController : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
-    private void hearbeat150()
+    private void heartbeat150()
     {
         audioSource.clip = ambientNoises[(int)Ambience.Heart150];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
@@ -259,7 +318,7 @@ public class GameController : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
-    private void hearbeatSlow()
+    private void heartbeatSlow()
     {
         audioSource.clip = ambientNoises[(int)Ambience.HeartSlow];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
@@ -278,11 +337,11 @@ public class GameController : MonoBehaviour
     }
 
 
-    private void nightAmbience()
+    /*private void nightAmbience()
     {
         audioSource.clip = ambientNoises[(int)Ambience.NightAmbience];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
-    }
+    }*/
 
     private void spookyNoise()
     {
