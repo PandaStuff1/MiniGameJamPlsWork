@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
         monsterMod = Random.Range(monsterRange, -monsterRange);
 
         //alice added this for the volume slider
-        audioSource.volume = PlayerPrefs.GetFloat("Volume");
+        audioSource.volume = PlayerPrefs.GetFloat("Volume", 1);
 
         Invoke("Monster", 0f);
 
