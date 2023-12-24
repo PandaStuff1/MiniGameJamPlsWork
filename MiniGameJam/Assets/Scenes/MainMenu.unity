@@ -917,10 +917,11 @@ MonoBehaviour:
     -
     keep the nightmare away with LEFT CLICK
 
-    - LEFT CLICK on its hiding place
-    or turn your nightlight back on
+    - LEFT CLICK on the night light
+    when it turns off to turn it back on
 
-    to stop it from waking you up'
+    - LEFT CLICK on its hiding place to
+    stop it getting into the room'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d610ce0c35d51254a8bcfdec9305b446, type: 2}
   m_sharedMaterial: {fileID: 127157668456561126, guid: d610ce0c35d51254a8bcfdec9305b446, type: 2}
