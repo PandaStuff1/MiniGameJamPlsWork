@@ -149,7 +149,7 @@ public class GameController : MonoBehaviour
             if (monsterActive == false)
             {
                 monsterActive = true;
-                currentEvent = Random.Range(1, 5);
+                currentEvent = Random.Range(1, 6);
                 bg.GetComponent<SpriteRenderer>().sprite = bgSprite[currentEvent];
                 if (currentEvent == 1) { lightOff(); }
                 else if (currentEvent == 2) { doorCreak(); }
@@ -224,6 +224,7 @@ public class GameController : MonoBehaviour
         audioSource.clip = ambientNoises[(int)Ambience.Monster];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
         Debug.Log("monster noise called");
+        monsterActive = false;
     }
 
     private void curtainOpen()
