@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
     private GameObject[] interactables = new GameObject[4];
     private bool monsterActive = false;
     [SerializeField]
-    private YouKindOfWin badWin;
+    //private YouKindOfWin badWin;
 
     //new
     public float newTimer = 0;
@@ -132,8 +132,8 @@ public class GameController : MonoBehaviour
             else
             {
                 this.enabled = false;
-                badWin.SetSheep(counter);
-                badWin.SetTotalSheep(totalSheep);
+                //badWin.SetSheep(counter);
+                //badWin.SetTotalSheep(totalSheep);
                 SceneManager.LoadScene("YouKindOfWin", LoadSceneMode.Additive);
             }
         }
@@ -179,6 +179,8 @@ public class GameController : MonoBehaviour
         counter++;
         textElement.text = counter.ToString();
         Debug.Log(counter);
+
+        PlayerPrefs.SetFloat("counter", counter);
     }
 
     private void spawnSheep()
@@ -186,6 +188,8 @@ public class GameController : MonoBehaviour
         totalSheep++;
         timerMod = Random.Range(timerRange, -timerRange);
         Instantiate(sheep, spawnPos, Quaternion.identity);
+
+        PlayerPrefs.SetFloat("totalSheep", totalSheep);
     }
 
 
